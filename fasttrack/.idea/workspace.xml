@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="35a806af-191a-4389-8d5a-57d11d4054cc" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectId" id="1qBMP4C7ON80avcREvVkGBSNxnv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views-layouts" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor.code.editing" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\fasttracknative\views-layouts" />
+      <recent name="C:\xampp\htdocs\fasttracknative\views-tester" />
+      <recent name="C:\xampp\htdocs\fasttracknative\views" />
+      <recent name="C:\xampp\htdocs\Assignmnet BIT302 Webpage\action" />
+      <recent name="C:\xampp\htdocs\Assignmnet BIT302 Webpage\views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\fasttracknative\action" />
+      <recent name="C:\xampp\htdocs\fasttracknative\views-layouts" />
+      <recent name="C:\xampp\htdocs\fasttracknative" />
+      <recent name="C:\xampp\htdocs\fasttracknative\views-tester" />
+      <recent name="C:\xampp\htdocs\fasttracknative\views-patient" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="35a806af-191a-4389-8d5a-57d11d4054cc" name="Default Changelist" comment="" />
+      <created>1616548502816</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616548502816</updated>
+      <workItem from="1616548504352" duration="14360000" />
+      <workItem from="1616603441616" duration="10796000" />
+      <workItem from="1616640462041" duration="21366000" />
+      <workItem from="1616678314093" duration="9680000" />
+      <workItem from="1616743736058" duration="209000" />
+      <workItem from="1616744116265" duration="25429000" />
+      <workItem from="1616824645808" duration="18758000" />
+      <workItem from="1616894612561" duration="10000000" />
+      <workItem from="1617017955128" duration="8456000" />
+      <workItem from="1617028285573" duration="10141000" />
+      <workItem from="1617073967184" duration="10260000" />
+      <workItem from="1617098162536" duration="2428000" />
+      <workItem from="1617100628194" duration="14049000" />
+      <workItem from="1617174794681" duration="626000" />
+      <workItem from="1617265794674" duration="9618000" />
+      <workItem from="1617618224669" duration="16218000" />
+      <workItem from="1617682598300" duration="52903000" />
+      <workItem from="1617762721348" duration="28554000" />
+      <workItem from="1617805681905" duration="766000" />
+      <workItem from="1617806600625" duration="7870000" />
+      <workItem from="1617862346641" duration="8193000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

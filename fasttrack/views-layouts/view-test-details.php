@@ -116,7 +116,8 @@
               $data = $connect->query("SELECT * FROM covid_test INNER JOIN patient ON covid_test.test_id=covid_test.test_id WHERE covid_test.test_id='$test_id'");
               while($test = mysqli_fetch_array($data)){
                   if ($test[1] == $test['patient_id']){
-                    // get the test kit name
+
+                      // get the test kit name
                     $kit_id=$test['kit_id'];
                     $kit = $connect->query("SELECT * FROM test_kit WHERE kit_id='$kit_id'");
                     $d = mysqli_fetch_array($kit);
@@ -125,11 +126,17 @@
                     $officer_id=$test['officer_id'];
                     $officer = $connect->query("SELECT * FROM center_officer WHERE officer_id='$officer_id'");
                     $d2 = mysqli_fetch_array($officer);
+
+                    // get the test center name
+                    $center_id = $d2['center_id'];
+                    $test_center = $connect->query("SELECT * FROM test_center WHERE center_id='$center_id'");
+                    $d3 = mysqli_fetch_array($test_center);
               ?>
               <p class="text-darker"><strong>Test ID:</strong> <?php echo $test['test_id']?></p>
-              <p class="text-darker"><strong>Test Kit Name:</strong> <?php echo $d['name']?></p>
-              <p class="text-darker"><strong>Tester Name:</strong> <?php echo $d2['name']?></p>
               <p class="text-darker"><strong>Patient Name:</strong> <?php echo $test['name']?></p>
+              <p class="text-darker"><strong>Test Center:</strong> <?php echo $d3['center_name']?></p>
+              <p class="text-darker"><strong>Tester:</strong> <?php echo $d2['name']?></p>
+              <p class="text-darker"><strong>Test Kit:</strong> <?php echo $d['name']?></p>
               <p class="text-darker"><strong>Test Date:</strong> <?php echo $test['test_date']?></p>
               <p class="text-darker"><strong>Result Date:</strong>
                 <?php
@@ -146,7 +153,7 @@
                 } else {
                   echo $test['result'];
                 }?></p>
-              <p class="text-darker"><strong>Status:</strong><?php echo $test['status']?></p>
+              <p class="text-darker"><strong>Status:</strong> <?php echo $test['status']?></p>
               <?php
                 }
               }

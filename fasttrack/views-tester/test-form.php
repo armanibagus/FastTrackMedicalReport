@@ -86,7 +86,7 @@
             $data = mysqli_query($connect, "select * from covid_test where test_id='$test_id'");
             while ($d = mysqli_fetch_array($data)){
             ?>
-              <form role="form" action="../action/action-update-test-result.php" method="post" onSubmit="return validation()">
+              <form role="form" action="../action/action-update-test-result.php" method="post">
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <div class="input-group-prepend">
@@ -110,7 +110,11 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
-                      <input class="form-control" placeholder="Result" type="text" name="result" id="result">
+                      <select class="form-control" type="text" name="result" id="result" required>
+                          <option value="" disabled selected>Test Result</option>
+                          <option value="Positive">Positive</option>
+                          <option value="Negative">Negative</option>
+                      </select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -118,7 +122,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
                     </div>
-                      <input class="form-control" placeholder="Result Date" type="date" name="result_date" id="result_date">
+                      <input class="form-control" placeholder="Result Date" type="date" name="result_date" id="result_date" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -126,9 +130,8 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                     </div>
-                      <select class="form-control" type="text" name="status" id="status">
-                        <option value="" disabled>Status</option>
-                        <option value="Pending" selected>Pending</option>
+                      <select class="form-control" type="text" name="status" id="status" required>
+                        <option value="" disabled selected>Status</option>
                         <option value="Complete">Complete</option>
                       </select>
                     </div>
@@ -162,19 +165,5 @@
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- JS -->
   <script src="../assets/js/style.js?v=1.2.0"></script>
-<!-- validation -->
-<script type="text/javascript">
-    function validation() {
-        var result = document.getElementById("result").value;
-        var result_date = document.getElementById("result_date").value;
-        var status = document.getElementById("status").value;
-        if (result!= "" && result_date!="" && status!="") {
-            return true;
-        }else{
-            alert('Empty field!');
-            return false;
-        }
-    }
-</script>
 </body>
 </html>

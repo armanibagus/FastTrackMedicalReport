@@ -86,14 +86,14 @@
               $data = mysqli_query($connect,"select * from test_kit where kit_id='$kit_id'");
               while($d = mysqli_fetch_array($data)){
               ?>
-              <form role="form" action="../action/action-update-test-kit.php" method="post" onSubmit="return validation()">
+              <form role="form" action="../action/action-update-test-kit.php" method="post">
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-syringe"></i></span>
                     </div>
                     <input class="form-control" name="kit_id" placeholder="Test Kit Id" type="hidden" value="<?php echo $d['kit_id']?>">
-                    <input class="form-control" name="name" id="name" placeholder="Name" type="text" value="<?php echo $d['name']?>">
+                    <input class="form-control" name="name" id="name" placeholder="Name" type="text" value="<?php echo $d['name']?>" disabled>
                   </div>
                 </div>
                 <div class="form-group">
@@ -101,7 +101,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-box-open"></i></span>
                     </div>
-                    <input class="form-control" name="stock" id="stock" placeholder="Stock" type="text" value="<?php echo $d['stock']?>">
+                    <input type="number" class="form-control" name="stock" id="stock" placeholder="Stock" value="<?php echo $d['stock']?>" required>
                   </div>
                 </div>
                   <div class="form-group">
@@ -109,7 +109,7 @@
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
                           </div>
-                          <textarea class="form-control" name="description" id="description" placeholder="Description" type="text"><?php echo $d['description']?></textarea>
+                          <textarea class="form-control" name="description" id="description" placeholder="Description" type="text" required><?php echo $d['description']?></textarea>
                       </div>
                   </div>
                 <div class="text-right">
@@ -141,19 +141,5 @@
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- JS -->
   <script src="../assets/js/style.js?v=1.2.0"></script>
-  <!-- validation -->
-  <script type="text/javascript">
-      function validation() {
-          var name = document.getElementById("name").value;
-          var stock = document.getElementById("stock").value;
-          var description = document.getElementById("description").value;
-          if (name!= "" && stock!="" && description!="") {
-              return true;
-          }else{
-              alert('Empty field!');
-              return false;
-          }
-      }
-  </script>
 </body>
 </html>

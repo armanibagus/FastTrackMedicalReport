@@ -1,3 +1,4 @@
+<?php include 'action/action-login.php'?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,14 +42,17 @@
               <div class="text-center text-muted mb-4">
                 <img alt="Image placeholder" src="assets/img/brand/user.png" class="avatar rounded-circle">
                 <br><br><h2>Login</h2><br>
+                <?php if(isset($error)):?>
+                    <small class="text-danger"><?php echo $error?></small>
+                <?php endif ?>
               </div>
-              <form role="form" action="action/action-login.php" method="post" onSubmit="return validation()">
+              <form role="form" action="login.php" method="post">
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Username" type="text" name="username" id="username">
+                    <input class="form-control" placeholder="Username" type="text" name="username" id="username" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -56,11 +60,11 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="password" id="password">
+                    <input class="form-control" placeholder="Password" type="password" name="password" id="password" required>
                   </div>
                 </div>
                 <div class="text-center">
-                    <input type="submit" class="btn btn-outline-success my-4" value="Login">
+                    <input name="submit" type="submit" class="btn btn-outline-success my-4" value="Login">
                 </div>
               </form>
             </div>
@@ -83,18 +87,5 @@
   <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- JS -->
   <script src="assets/js/style.js?v=1.2.0"></script>
-  <!-- validation -->
-  <script type="text/javascript">
-      function validation() {
-          var username = document.getElementById("username").value;
-          var password = document.getElementById("password").value;
-          if (username != "" && password!="") {
-              return true;
-          }else{
-              alert('Empty field!');
-              return false;
-          }
-      }
-  </script>
 </body>
 </html>

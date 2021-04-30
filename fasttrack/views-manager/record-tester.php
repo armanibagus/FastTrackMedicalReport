@@ -1,3 +1,50 @@
+<?php
+include '../action/connection.php';
+
+$username = "";
+$password = "";
+$name = "";
+$phone_number = "";
+$address = "";
+
+if (isset($_POST['submit'])) {
+
+  $center_id = $_POST['center_id'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $name = $_POST['name'];
+  $phone_number = $_POST['phone_number'];
+  $address = $_POST['address'];
+
+  if ($username != "" && $password != "" && $name != "" && $phone_number != "" && $address != "") {
+
+    $data = mysqli_query($connect, "select * from center_officer where username='$username'");
+    $data2 = mysqli_query($connect, "select * from center_officer where password='$password'");
+    $data3 = mysqli_query($connect, "select * from patient where username='$username'");
+    $data4 = mysqli_query($connect, "select * from patient where password='$password'");
+
+    if (mysqli_num_rows($data) > 0 || mysqli_num_rows($data3) > 0) {
+      $uname_error = "Username already exist!";
+    } else if (mysqli_num_rows($data2) > 0 || mysqli_num_rows($data4) > 0){
+        $pass_error = "Password already exist!";
+    } else if (strlen($username) < 6 || strlen($username) > 16) {
+        if (strlen($username) > 16)
+          $uname_error = "Username is too long! (6-16 characters long)";
+        else if (strlen($username) < 6)
+          $uname_error = "Username is too short! (6-16 characters long)";
+    } else if (strlen($password) < 6 || strlen($password) > 16) {
+      if (strlen($password) > 16)
+        $pass_error = "Password is too long! (6-16 characters long)";
+      else if (strlen($password) < 6)
+        $pass_error = "Password is too short! (6-16 characters long)";
+    } else {
+      mysqli_query($connect, "insert into center_officer values('','$center_id','$username',
+                                  '$password','$name','$phone_number','$address','Tester')");
+      header("location: ../views-manager/record-tester.php");
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -133,9 +180,9 @@
                             <tr>
                               <?php
                               include '../action/connection.php';
-                              $username = $_SESSION['username'];
+                              $usern = $_SESSION['username'];
 
-                              $user_manager = mysqli_query($connect, "select * from center_officer where username='$username'");
+                              $user_manager = mysqli_query($connect, "select * from center_officer where username='$usern'");
                               $manager = mysqli_fetch_array($user_manager);
 
                               $center_id = $manager['center_id'];
@@ -174,9 +221,9 @@
                       <?php
                       include '../action/connection.php';
 
-                      $username = $_SESSION['username'];
+                      $usern = $_SESSION['username'];
 
-                      $user_manager = mysqli_query($connect, "select * from center_officer where username='$username'");
+                      $user_manager = mysqli_query($connect, "select * from center_officer where username='$usern'");
                       $manager = mysqli_fetch_array($user_manager);
 
                       $center_id = $manager['center_id'];
@@ -184,7 +231,7 @@
                       $test_center = mysqli_query($connect, "select * from test_center where center_id='$center_id'");
                       while($center = mysqli_fetch_array($test_center)){
                       ?>
-                        <form role="form" action="../action/action-record-tester.php" method="post" onSubmit="return validation()">
+                        <form role="form" action="record-tester.php" method="post">
                             <h6 class="heading-small text-muted mb-4">Tester information</h6>
                             <div class="pl-lg-4">
                                 <div class="row">
@@ -192,19 +239,25 @@
                                         <div class="form-group">
                                             <input class="form-control" name="center_id" placeholder="Center ID" type="hidden" value="<?php echo $center['center_id']?>">
                                             <label class="form-control-label" for="input-username">Username</label>
-                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+                                            <input type="text" name="username" id="username" class="form-control" placeholder="Username" value="<?php echo $username?>" required>
+                                            <?php if(isset($uname_error)):?>
+                                            <small class="text-danger"><?php echo $uname_error?></small>
+                                            <?php endif ?>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Password</label>
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter new password">
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter new password" value="<?php echo $password?>" required>
+                                              <?php if(isset($pass_error)):?>
+                                              <small class="text-danger"><?php echo $pass_error?></small>
+                                              <?php endif ?>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Full Name</label>
-                                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter full name">
+                                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter full name" value="<?php echo $name?>" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -223,19 +276,23 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-control-label" >Phone Number</label>
-                                            <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Phone number">
+                                            <input type="number" maxlength = "15" name="phone_number" id="phone_number" class="form-control" placeholder="Phone Number" value="<?php echo $phone_number?>" required
+                                                   oninput="javascript:
+                                                   if (this.value.length > this.maxLength)
+                                                       this.value = this.value.slice(0, this.maxLength);"
+                                            >
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-control-label" >Address</label>
-                                            <input type="text" name="address" id="address" class="form-control" placeholder="Home address">
+                                            <input type="text" name="address" id="address" class="form-control" placeholder="Home address" value="<?php echo $address?>" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col text-right">
-                                <input type="submit" class="btn btn-outline-success" value="Submit">
+                                <input type="submit" name="submit" class="btn btn-outline-success" value="Submit">
                             </div>
                         </form>
                         <?php
@@ -249,6 +306,7 @@
         <?php include '../views-layouts/footer.php'?>
     </div>
 </div>
+<?php include '../views-layouts/modal-logout.php'?>
 <!-- Core -->
 <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
 <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -257,22 +315,5 @@
 <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
 <!-- JS -->
 <script src="../assets/js/style.js?v=1.2.0"></script>
-<!-- validation -->
-<script type="text/javascript">
-    function validation() {
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-        var name = document.getElementById("name").value;
-        var phone_number = document.getElementById("phone_number").value;
-        var address = document.getElementById("address").value;
-        if (username != "" && password!="" && name!="" && phone_number!="" && address!="") {
-            return true;
-        }else{
-            alert('Empty field!');
-            return false;
-        }
-    }
-</script>
-
 </body>
 </html>

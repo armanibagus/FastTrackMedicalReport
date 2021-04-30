@@ -175,11 +175,13 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                           <a class="dropdown-item" href="test-kit-form-update.php?kit_id=<?php echo $test_kit['kit_id']?>">Update</a>
+                          <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#deleteModal<?= $test_kit['kit_id']?>">Delete</a>
                         </div>
                       </div>
                     </td>
                   </tr>
                   <?php
+                  include '../views-layouts/modal-delete-test-kit.php';
                   }
                   ?>
                 </tbody>
@@ -194,6 +196,7 @@
       <?php include '../views-layouts/footer.php'?>
     </div>
   </div>
+<?php include '../views-layouts/modal-logout.php'?>
   <!-- Core -->
   <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

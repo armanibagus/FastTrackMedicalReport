@@ -4,21 +4,22 @@
 session_start();
 
 // include the database connection
-include 'connection.php';
+include 'action/connection.php';
 
+if (isset($_POST['submit'])) {
 // get the user input
-$username = $_POST['username'];
-$password = $_POST['password'];
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
 // get the data in the tables
-$data1 = mysqli_query($connect, "select * from center_officer where username='$username' and password='$password'");
-$check_officer = mysqli_num_rows($data1);
+  $data1 = mysqli_query($connect, "select * from center_officer where username='$username' and password='$password'");
+  $check_officer = mysqli_num_rows($data1);
 
-$data2 = mysqli_query($connect, "select * from patient where username='$username' and password='$password'");
-$check_patient = mysqli_num_rows($data2);
+  $data2 = mysqli_query($connect, "select * from patient where username='$username' and password='$password'");
+  $check_patient = mysqli_num_rows($data2);
 
 // check if the user is center officer or not
-if ($check_officer > 0 ) {
+  if ($check_officer > 0) {
     $_SESSION['username'] = $username;
     $_SESSION['status'] = "login";
 
@@ -26,16 +27,17 @@ if ($check_officer > 0 ) {
     $manager = mysqli_fetch_array($user_manager);
 
     if ($manager > 0) {
-      header("Location: ../views-manager/home.php");
+      header("Location: views-manager/home.php");
     } else {
-      header("Location: ../views-tester/home.php");
+      header("Location: views-tester/home.php");
     }
-} else if($check_patient > 0) {
-  $_SESSION['username'] = $username;
-  $_SESSION['status'] = "login";
+  } else if ($check_patient > 0) {
+    $_SESSION['username'] = $username;
+    $_SESSION['status'] = "login";
 
-  header("Location: ../views-patient/home.php");
-} else {
-    header("Location: ../login.php");
+    header("Location: views-patient/home.php");
+  } else {
+    $error = "Username & password does not match!";
+  }
 }
 ?>

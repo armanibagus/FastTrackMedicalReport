@@ -17,7 +17,8 @@
 </head>
 
 <body class="bg-gradient-secondary">
-<?php include '../action/action-check-login.php'?>
+<?php include '../action/action-check-login.php';
+include '../action/action-patient-form.php';?>
   <!-- Navbar -->
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
@@ -80,29 +81,35 @@
               <div class="text-muted text-center mt-2 mb-4"><h2 class="text-green">Patient Details</h2></div>
             </div>
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form" action="../action/action-patient-form.php" method="post" onSubmit="return validation()">
+              <form role="form" action="patient-form.php" method="post">
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Username" type="text" name="username" id="username">
+                    <input class="form-control" placeholder="Username" type="text" name="username" id="username" value="<?php echo $username?>" required>
                   </div>
+                  <?php if(isset($uname_error)):?>
+                      <small class="text-danger"><?php echo $uname_error?></small>
+                  <?php endif ?>
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="password" id="password">
+                    <input class="form-control" placeholder="Password" type="password" name="password" id="password" value="<?php echo $password?>" required>
                   </div>
+                  <?php if(isset($pass_error)):?>
+                      <small class="text-danger"><?php echo $pass_error?></small>
+                  <?php endif ?>
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
-                      <input class="form-control" placeholder="Name" type="text" name="patient_name" id="patient_name">
+                      <input class="form-control" placeholder="Name" type="text" name="patient_name" id="patient_name" value="<?php echo $patient_name?>" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -110,7 +117,12 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
                     </div>
-                      <input class="form-control" placeholder="Phone Number" type="text" name="phone_number" id="phone_number">
+                      <input type="number" maxlength="15"class="form-control" placeholder="Phone Number" type="text" name="phone_number" id="phone_number"
+                         value="<?php echo $phone_number?>" required
+                         oninput="javascript:
+                           if (this.value.length > this.maxLength)
+                               this.value = this.value.slice(0, this.maxLength);"
+                      >
                   </div>
                 </div>
                 <div class="form-group">
@@ -118,7 +130,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
                     </div>
-                      <input class="form-control" placeholder="Address" type="text" name="address" id="address">
+                      <input class="form-control" placeholder="Address" type="text" name="address" id="address" value="<?php echo $address?>" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -126,7 +138,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                     </div>
-                      <select class="form-control" type="text" name="patient_type" id="patient_type">
+                      <select class="form-control" type="text" name="patient_type" id="patient_type" required>
                         <option value="" disabled selected>Patient Type</option>
                         <option value="Returnee">Returnee</option>
                         <option value="Quarantined">Quarantined</option>
@@ -141,7 +153,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-stethoscope"></i></span>
                     </div>
-                      <input class="form-control" placeholder="Symptoms" type="text" name="symptoms" id="symptoms">
+                      <input class="form-control" placeholder="Symptoms" type="text" name="symptoms" id="symptoms" value="<?php echo $symptoms?>" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -149,7 +161,7 @@
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-syringe"></i></span>
                           </div>
-                          <select class="form-control" type="text" name="kit_id" id="test_kit">
+                          <select class="form-control" type="text" name="kit_id" id="test_kit" required>
                             <option value="" disabled selected>Test Kit Type</option>
                             <?php
                             include '../action/connection.php';
@@ -171,8 +183,7 @@
                       </div>
                   </div>
                 <div class="text-right">
-                  <button type="reset" class="btn mt-4 btn-success">Reset</button>
-                  <button type="submit" class="btn mt-4 btn-outline-success">Submit</button>
+                  <button type="submit" name="submit" class="btn mt-4 btn-outline-success">Submit</button>
                 </div>
               </form>
             </div>
@@ -196,24 +207,5 @@
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- JS -->
   <script src="../assets/js/style.js?v=1.2.0"></script>
-<!-- validation -->
-<script type="text/javascript">
-    function validation() {
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-        var patient_name = document.getElementById("patient_name").value;
-        var phone_number = document.getElementById("phone_number").value;
-        var address = document.getElementById("address").value;
-        var patient_type = document.getElementById("patient_type").value;
-        var symptoms = document.getElementById("symptoms").value;
-        var test_kit = document.getElementById("test_kit").value;
-        if (username != "" && password!="" && patient_name!="" && phone_number!="" && address!="" && patient_type!="" && symptoms!="" && test_kit!="") {
-            return true;
-        }else{
-            alert('Empty field!');
-            return false;
-        }
-    }
-</script>
 </body>
 </html>

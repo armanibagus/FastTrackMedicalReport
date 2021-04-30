@@ -36,7 +36,7 @@
                             <span>My profile</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="../action/action-logout.php" class="dropdown-item">
+                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
                         </a>
